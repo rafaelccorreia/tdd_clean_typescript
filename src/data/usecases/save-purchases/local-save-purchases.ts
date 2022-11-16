@@ -1,5 +1,5 @@
 import { CacheStore } from '@/data/protocols/cache'
-import { SavePurchase } from '@/domain'
+import { SavePurchase } from '@/domain/usecases'
 
 export class LocalSavePurchases implements SavePurchase {
   constructor(private readonly cacheStore: CacheStore) {}
