@@ -5,12 +5,12 @@ export class LocalLoadPurchases implements SavePurchase, LoadPurchases {
   private readonly key = 'purchases'
   constructor(
     private readonly cacheStore: CacheStore,
-    private readonly timestamp: Date
+    private readonly currentDate: Date
   ) {}
 
   async save(purchases: Array<SavePurchase.Params>): Promise<void> {
     this.cacheStore.replace(this.key, {
-      timestamp: this.timestamp,
+      timestamp: this.currentDate,
       value: purchases
     })
   }
