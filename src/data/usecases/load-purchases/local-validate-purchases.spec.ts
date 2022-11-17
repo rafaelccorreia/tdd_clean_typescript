@@ -43,40 +43,32 @@ describe('LocalSavePurchases', () => {
     expect(cacheStore.fetchKey).toBe('purchases')
   })
 
-  it('Should have no side effects if cache is expired', async () => {
+  it('Should delete cache if its expired', () => {
     const currentDate = new Date()
     const timestamp = getCacheExpirationDate(currentDate)
     timestamp.setSeconds(timestamp.getSeconds() - 1)
     const { cacheStore, sut } = makeSut(currentDate)
-    cacheStore.fetchResult = {
-      timestamp,
-      value: mockPurchases()
-    }
-    const purchases = await sut.loadAll()
+    cacheStore.fetchResult = { timestamp }
+    sut.validate()
     expect(cacheStore.actions).toEqual([
       CacheStoreSpy.Action.fetch,
       CacheStoreSpy.Action.delete
     ])
     expect(cacheStore.fetchKey).toBe('purchases')
     expect(cacheStore.deleteKey).toBe('purchases')
-    expect(purchases).toEqual([])
   })
 
-  it('Should return an empty list if cache is on expiration date', async () => {
+  it('Should delete cache if its on expiration date', () => {
     const currentDate = new Date()
     const timestamp = getCacheExpirationDate(currentDate)
     const { cacheStore, sut } = makeSut(currentDate)
-    cacheStore.fetchResult = {
-      timestamp,
-      value: mockPurchases()
-    }
-    const purchases = await sut.loadAll()
+    cacheStore.fetchResult = { timestamp }
+    sut.validate()
     expect(cacheStore.actions).toEqual([
       CacheStoreSpy.Action.fetch,
       CacheStoreSpy.Action.delete
     ])
     expect(cacheStore.fetchKey).toBe('purchases')
     expect(cacheStore.deleteKey).toBe('purchases')
-    expect(purchases).toEqual([])
   })
 })
