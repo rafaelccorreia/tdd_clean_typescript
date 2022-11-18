@@ -75,6 +75,7 @@ describe('LocalSavePurchases', () => {
     expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch])
     expect(cacheStore.fetchKey).toBe('purchases')
     expect(purchases).toEqual([])
+    // teste
   })
 
   it('Should return an empty list if Cache is empty', async () => {
