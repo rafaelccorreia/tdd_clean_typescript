@@ -14,7 +14,7 @@ export class LocalLoadPurchases implements SavePurchase, LoadPurchases {
       value: purchases
     })
   }
-
+  //test git commit msg linter
   async loadAll(): Promise<Array<LoadPurchases.Result>> {
     try {
       const cache = this.cacheStore.fetch(this.key)
